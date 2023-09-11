@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: stocks-api-gateway
+
+server:
+  port: 9999
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8888/eureka
+    register-with-eureka: false
+  instance:
+    preferIpAddress: true
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: hystrix.stream
+
+
+

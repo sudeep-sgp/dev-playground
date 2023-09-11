@@ -1,0 +1,17 @@
+
+spring:
+  application:
+    name: STOCK-EXPLORER
+  cloud:
+    config:
+      enabled: false
+      uri: http://localhost:9006
+
+server:
+  port: 9000
+
+kafka:
+   topic:
+     stock-recommendation: "stock-recommendations"
+
+

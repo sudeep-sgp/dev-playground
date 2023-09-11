@@ -1,0 +1,39 @@
+
+spring:
+  cloud:
+    function:
+      definition: stockProcessor
+    stream:
+      bindings:
+        stockProcessor-out-0:
+          destination: esg-scores
+#          content-type: application/json
+#          group: stock-recommendation
+#          producer:
+#            partitionKeyExpression: payload.tickerSymbol
+#            partitionCount: 2
+#            requiredGroups: stock-recommendation
+#            requiredAcks: 1
+#            useNativeEncoding: true
+        stockProcessor-in-0:
+          destination: stock-recommendations
+      kafka:
+        bindings:
+          stockProcessor-out-0:
+            producer:
+              configuration:
+                value.serializer: org.apache.kafka.common.serialization.JsonSerializer
+          stockProcessor-in-0:
+            consumer:
+              configuration:
+                value.deserializer: org.apache.kafka.common.serialization.JsonDeserializer
+                spring.json.trusted.packages: "*"
+
+        streams:
+          binder:
+            configuration:
+              spring.json.trusted.packages: '*'
+            brokers:
+              - 127.0.0.1:9092
+              - 127.0.0.1:9091
+
