@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+
+- name: First Playbook
+  gather_facts: false
+  hosts: localhost
+  tasks:
+    # - name: Create STDOUT output
+    #   command: 'echo "1 2 3 4 5 6"'
+    #   register: result
+
+    # - name: Show full result
+    #   debug:
+    #     var: result
+    - name: Find files to remove by patterns
+      find:
+        recurse: yes
+        paths: "/Users/sudeep/Library/Mobile Documents/com~apple~CloudDocs/myfiles/NEW_LEARNINGS/ansible/test2"
+        patterns:
+        - "test.yml"
+      register: destination
+
+    # - debug:
+    #     var: '{{ destination.files[0].path" | dirname}}'
+    - name: copy test
+      copy:
+          src: "{{ item.src }}"
+          dest: "{{ item.dest }}"
+          mode: 0755
+      loop:
+        - { src: '/Users/sudeep/Library/Mobile Documents/com~apple~CloudDocs/myfiles/NEW_LEARNINGS/ansible/test1/inner1/', dest: '{{ destination.files[0].path | dirname}}'}
