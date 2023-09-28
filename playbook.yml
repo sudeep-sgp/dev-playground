@@ -15,7 +15,7 @@
     - name: Find files to remove by patterns
       find:
         recurse: yes
-        paths: "/Users/sudeep/Library/Mobile Documents/com~apple~CloudDocs/myfiles/NEW_LEARNINGS/ansible/test2"
+        paths: "/ansible/test2"
         patterns:
         - "test.yml"
       register: destination
@@ -28,4 +28,4 @@
           dest: "{{ item.dest }}"
           mode: 0755
       loop:
-        - { src: '/Users/sudeep/Library/Mobile Documents/com~apple~CloudDocs/myfiles/NEW_LEARNINGS/ansible/test1/inner1/', dest: '{{ destination.files[0].path | dirname}}'}
+        - { src: '/ansible/test1/inner1/', dest: '{{ destination.files[0].path | dirname}}'}
